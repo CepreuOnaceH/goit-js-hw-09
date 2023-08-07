@@ -42,6 +42,8 @@ document
   .querySelector('#datetime-picker')
   .addEventListener('change', selectDate);
 document.querySelector('button[data-start]').addEventListener('click', () => {
+  document.querySelector('button[data-start]').disabled = true;
+  document.querySelector('button[data-reset]').disabled = false;
   const selectedDate = new Date(
     document.querySelector('#datetime-picker').value
   );
@@ -57,6 +59,13 @@ document.querySelector('button[data-start]').addEventListener('click', () => {
       showTime(convertMs(difference));
     }
   }, 1000);
+  document.querySelector('button[data-reset]').addEventListener('click', () => {
+    clearInterval(countdownInterval);
+    showTime({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+    document.querySelector('#datetime-picker').disabled = false;
+    document.querySelector('button[data-start]').disabled = false;
+    document.querySelector('button[data-reset]').disabled = true;
+  });
 });
 
 function convertMs(ms) {
