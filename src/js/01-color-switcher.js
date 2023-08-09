@@ -8,13 +8,15 @@ function getRandomHexColor() {
     .toString(16)
     .padStart(6, 0)}`;
 }
-const intervalId = setInterval(() => {
+let intervalId = setInterval(() => {
   document.body.style.backgroundColor = getRandomHexColor();
 }, 1000);
 function changeColor() {
   changeColorBtn.disabled = true;
   stopChangeColorBtn.disabled = false;
-  intervalId();
+  intervalId = setInterval(() => {
+    document.body.style.backgroundColor = getRandomHexColor();
+  }, 1000);
 }
 function stopChangeColor() {
   changeColorBtn.disabled = false;
